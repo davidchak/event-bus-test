@@ -13,8 +13,7 @@ const ComponentB = () => {
     if(active){
       timerId.current = setInterval(() => {
         const dtStr = new Date().toLocaleTimeString();
-        console.log(dtStr)
-        messageEvent.broadcast(dtStr)
+        messageEvent.emit(dtStr)
       }, 1000)
       
     }

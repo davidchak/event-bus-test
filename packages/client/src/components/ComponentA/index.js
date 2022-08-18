@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 
 const ComponentA = ({id}) => {
     const unsubscribe = useRef(null);

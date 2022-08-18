@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import useStore from "../../packages/store";
 
+
+// TODO: переделать на новый лад
 const ComponentC = ({id}) => {
     const [value, setValue] = useState("");
     const { setLog } = useStore(); 

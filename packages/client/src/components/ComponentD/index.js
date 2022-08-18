@@ -3,7 +3,7 @@
  * TODO: Продумать работу с множественным стором/разделить стор на части
  */
 
-
+// TODO: переделать на новый лад
 import { useEffect, useState } from "react";
 
 const ComponentD = () => {
@@ -13,10 +13,6 @@ const ComponentD = () => {
         const unsubscribe = window.sdk.data.subscribe((data) => {
             setLocalState(data)
         })
-
-        return () => {
-            unsubscribe()
-        }
     })
 
     return <div className="component_x">

@@ -1,5 +1,5 @@
 import "./styles.css";
-import withEventBus from "./packages/eventBus"
+import withEventBus from "./events"
 import ComponentA from "./components/ComponentA";
 import ComponentB from "./components/ComponentB";
 import ComponentC from "./components/ComponentC";
@@ -12,9 +12,9 @@ const App = () => {
       <h2>Start editing to see some magic happen!</h2>
       <ComponentA id={1} />
       <ComponentA id={2} />
-      <ComponentC />
-      <ComponentD />
       <ComponentB />
+      {/* <ComponentC /> */}
+      {/* <ComponentD /> */}
     </div>
   );
 };
