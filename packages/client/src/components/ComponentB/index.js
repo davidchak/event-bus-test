@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const ComponentB = () => {
   const timerId = useRef(null);
@@ -9,11 +10,23 @@ const ComponentB = () => {
     setActivate(!active);
   }
 
+  const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+}
+
   useEffect(() => {
     if(active){
       timerId.current = setInterval(() => {
-        const dtStr = new Date().toLocaleTimeString();
-        messageEvent.emit(dtStr)
+        axios.get(`https://jsonplaceholder.typicode.com/todos/${getRandomInt(1,200)}`)
+          .then(res => {
+            messageEvent.emit(JSON.stringify(res.data))
+          })
+          .catch(e => {
+            messageEvent.emit(e.message)
+          })
+        
       }, 1000)
       
     }

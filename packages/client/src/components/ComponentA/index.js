@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 
 const ComponentA = ({id}) => {
     const unsubscribe = useRef(null);
-    const [activate, setActivate ] = useState(false)
+    const [activate, setActivate ] = useState(true)
     const [busEvent, setBusEvent ] = useState(null)
     const messageEvent = window.sdk.message;
 
