@@ -9,7 +9,11 @@ const Logger = (eventBus) => {
 
   const subscribe = (cb) => {
     eventBus.on(type, cb);
-    return () => eventBus.off(type, cb);
+    return {
+      unsubscribe: () => {
+        eventBus.off(type, cb)
+      }
+    }
   };
 
   const emit = (loggerType = loggerTypes["info"], text) => {

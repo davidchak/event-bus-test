@@ -4,9 +4,11 @@ const Store = (eventBus) => {
   const subscribe = (cb) => {
     eventBus.on(type, cb);
 
-    return () => {
-      eventBus.off(type, cb);
-    };
+    return {
+      unsubscribe: () => {
+        eventBus.off(type, cb)
+      }
+    }
   };
 
   const emit = (...args) => {

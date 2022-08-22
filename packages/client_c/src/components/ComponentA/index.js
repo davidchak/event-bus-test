@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ComponentA = ({id}) => {
-    const unsubscribe = useRef(null);
+    const msgBus = useRef(null);
     const [activate, setActivate ] = useState(true)
     const [busEvent, setBusEvent ] = useState(null)
     const messageEvent = window.sdk.message;
@@ -12,13 +12,13 @@ const ComponentA = ({id}) => {
 
     const activateListenner = () => {
         if(activate){
-            unsubscribe.current = messageEvent.subscribe((data) => { 
+            msgBus.current = messageEvent.subscribe((data) => { 
                 setBusEvent(data)
             })
         }
 
-        if(!activate && unsubscribe.current){
-            unsubscribe.current()
+        if(!activate && msgBus.current){
+            msgBus.current.unsubscribe()
             setBusEvent(null)
         }
     }

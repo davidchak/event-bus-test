@@ -2,7 +2,7 @@ const EventRegister = (eventBus) => {
   let _type = null;
   let _setupComplete = false;
 
-  const setup = ({ name }) => {
+  const register = ({name, prefix}) => {
     if (_setupComplete) {
       return;
     }
@@ -17,18 +17,20 @@ const EventRegister = (eventBus) => {
     }
 
     eventBus.on(_type, cb);
-    return () => eventBus.off(_type, cb);
+
+    return {
+      unsubscribe: () => {
+        eventBus.off(_type, cb)
+      }
+    }
   };
 
-  const emit = (type, ...args) => {
-    if (!type) {
-      return;
-    }
-    eventBus.emit(type, ...args);
+  const emit = (...args) => {
+    eventBus.emit(_type, ...args);
   };
 
   return {
-    setup,
+    register,
     subscribe,
     emit
   };

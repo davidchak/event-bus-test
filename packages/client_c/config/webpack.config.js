@@ -26,6 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -557,6 +558,25 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+      new ModuleFederationPlugin({
+        name: "react_host",
+        filename: "remoteEntry.js",
+        remotes: {
+          remote: "remote@http://localhost:3000/remoteEntry.js",
+        },
+        exposes: {},
+        shared: {
+          ...appPackageJson["dependencies"],
+          react: {
+            singleton: true,
+            requiredVersion: appPackageJson["dependencies"]["react"],
+          },
+          "react-dom": {
+            singleton: true,
+            requiredVersion: appPackageJson["dependencies"]["react-dom"],
+          },
+        },
+      }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
