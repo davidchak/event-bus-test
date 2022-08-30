@@ -1,0 +1,9 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.component_x {
+  padding: 40px;
+  border: 1px dashed darkcyan;
+}

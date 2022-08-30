@@ -1,17 +1,18 @@
 {
   "name": "evbus",
   "root": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "workspaces": [
-    "./packages/*"
+    "./apps/*"
   ],
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@loadable/component": "^5.15.2",
-    "axios": "^0.27.2"
+  "scripts": {
+    "dev": "lerna run --parallel start",
+    "build": "lerna run --parallel build",
+    "bootstrap": "lerna bootstrap --ignore-scripts --hoist"
+  },
+  "devDependencies": {
+    "lerna": "^5.4.3"
   }
 }
